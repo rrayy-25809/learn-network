@@ -3,8 +3,8 @@ import socket
 port = 2500
 BUFSIZE = 1024
 
-sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-sock.bind(('192.168.31.66',port))
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.bind(('0.0.0.0',port))
 sock.listen(1)
 conn, (remotehost, remoteport) = sock.accept()
 print(f'connected by {remotehost}:{remoteport}')
@@ -13,5 +13,6 @@ while True:
     if not data:
         break
     print(f"Recevied message: {data.decode()}")
-    conn.send(data)
+    send_data = input("보낼 말:").encode()
+    conn.send(send_data)
 conn.close()
